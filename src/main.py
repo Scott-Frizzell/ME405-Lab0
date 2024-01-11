@@ -1,3 +1,7 @@
+"""! @file main.py
+
+"""
+
 import pyb
 from utime import sleepmillis
 import cqueue
@@ -14,13 +18,15 @@ while True:
     sleepmillis(5000)
 
 def step_response():
+    i = 10
     while True:
         if  int_queue.any():
             temp = int_queue.get()
             if temp >= 3.3:
                 print("End")
                 break
-            print("{:d},{:d}".format(0, temp))
+            print("{:d},{:d}".format(i, temp))
+            i += 10
     return
 
 def timer_int():
