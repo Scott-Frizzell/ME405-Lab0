@@ -5,6 +5,7 @@ Tests input and output of the Nucleo board with a capacitive step response.
 
 import pyb
 import cqueue
+import time
 
 pinC0 = pyb.Pin(pyb.Pin.board.PC0, pyb.Pin.OUT_PP) # Initialize C0 as output
 pinC0.low() # Set C0 to low
@@ -20,6 +21,7 @@ def step_response():
     """
     timer.counter(0) # Reset TC1 counter
     timer.callback(timer_int) # Set TC1 callback to timer_int()
+    time.sleep(.02) # Read first two data points as zero
     pinC0.high() # Set C0 to high
     
     while not queue.full(): # Wait until queue is full
@@ -40,7 +42,6 @@ def timer_int(channel):
     @param channel The timer channel that called the function
     @returns None
     """
-    #if channel == 1:
     queue.put(adc0.read())
     
     if  queue.full():
