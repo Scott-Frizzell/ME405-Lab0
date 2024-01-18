@@ -40,8 +40,9 @@ def timer_int(channel):
     @param channel The timer channel that called the function
     @returns None
     """
-    if channel == 1:
-        queue.put(adc0.read())
+    #if channel == 1:
+    queue.put(adc0.read())
+    
     if  queue.full():
         timer.callback(None) # Clear TC1 callback
     return
