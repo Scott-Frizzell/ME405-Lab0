@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['timer_5fint_0',['timer_int',['../main_8py.html#a25caa7996bce2414f179433263c8fa7d',1,'main']]]
+  ['plot_5fresponse_0',['plot_response',['../desktop_8py.html#a10ddcbab944754627e58e11d1ad4115a',1,'desktop']]]
 ];

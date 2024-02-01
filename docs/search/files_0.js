@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_2epy_0',['main.py',['../main_8py.html',1,'']]]
+  ['desktop_2epy_0',['desktop.py',['../desktop_8py.html',1,'']]]
 ];
