@@ -14,6 +14,10 @@ timer = pyb.Timer(1, freq=100) # Initialize timer channel 1 to 100Hz (10ms)
 timer.callback(None) # Set TC1 to have no callback
 queue = cqueue.IntQueue(200) # Initialize a queue to store ADC readings
 
+def wait_for_input():
+    pass
+
+
 def step_response():
     """!
     Enables timer interrupts and begins a step response. After the response is done, prints each value.
@@ -49,4 +53,4 @@ def timer_int(channel):
     return
 
 if __name__ == "__main__":
-    step_response()
+    wait_for_input()

@@ -8,20 +8,23 @@ from matlibplot.backends.backend_tkagg import (FigureCanvasTKAgg, NavigationTool
 
 
 def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
-    times = [ t * 5 for t in range(200)]
+    times = []
     result = []
 
-    with Serial('/dev/ttyUSB0', 19200, timeout=1) as ser:
+    with Serial('COM3', 19200, timeout=1) as ser:
         ser.write("Begin")
         ser.flush()
 
         time.sleep(3)
 
         while True:
-            try:
-                result.append(ser.readline())
-            except:
+            line = ser.readline().strip()
+            
+            if line == "End":
                 break
+            else:
+                times.append(line.split(",")[0])
+                result.append(line.split(",")[1])
 
     plot_axes.plot(times, result)
     plot_axes.set_xlabel(xlabel)
