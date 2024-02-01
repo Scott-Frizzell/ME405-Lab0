@@ -3,30 +3,30 @@ import time
 import tkinter
 from random import random
 from serial import Serial
-from matlibplot.figure import figure
-from matlibplot.backends.backend_tkagg import (FigureCanvasTKAgg, NavigationToolbar2Tk)
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 
 def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
     times = []
-    result = [t for t in range(0,.01,2)]
+    result = []
 
-#    with Serial('COM3', 19200, timeout=1) as ser:
-#         ser.write("Begin")
-#         ser.flush()
-# 
-#         time.sleep(3)
-# 
-#         while True:
-#             line = ser.readline().strip()
-#             
-#             if line == "End":
-#                 break
-#             else:
-#                 times.append(line.split(",")[0])
-#                 result.append(line.split(",")[1])
+   with Serial('COM5', 19200, timeout=1) as ser:
+        ser.write("Begin")
+        ser.flush()
+
+        time.sleep(3)
+
+        while True:
+            line = ser.readline().strip()
+            
+            if line == "End":
+                break
+            else:
+                times.append(line.split(",")[0])
+                result.append(line.split(",")[1])
     
-    theoretical = [(3.3*(1-Math.exp(-t/(100000*.0000033)))) for t in range(0, .01, 2)]
+    theoretical = [(3.3*(1-math.exp(-(t/100)/(100000*.0000033)))) for t in range(0,200)]
     
     plot_axes.scatter(times, result)
     plot_axes.plot(times, theoretical, linestyle="-")
@@ -38,7 +38,7 @@ def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
 
 def tk_matplot(plot_function, xlabel, ylabel, title):
     tk_root = tkinter.Tk()
-    tk_root.w,_title(title)
+    tk_root.wm_title(title)
 
     fig = Figure()
     axes = fig.add_subplot()
@@ -49,7 +49,7 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
 
     button_quit = tkinter.Button(master=tk_root, text="Quit", command=tk_root.destroy)
     button_clear = tkinter.Button(master=tk_root, text="Clear", command=lambda: axes.clear())
-    button.run = tkinter.Button(master=tk_root, text="Run", command=lambda: plot_function(axes, canvas, xlabel, ylabel))
+    button_run = tkinter.Button(master=tk_root, text="Run", command=lambda: plot_function(axes, canvas, xlabel, ylabel))
 
     canvas.get_tk_widget().grid(row=0, column=0, columnspan=3)
     toolbar.grid(row=1, column=0, columnspan=3)
