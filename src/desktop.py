@@ -11,20 +11,21 @@ def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
     times = []
     result = []
 
-   with Serial('COM5', 19200, timeout=1) as ser:
-        ser.write("Begin")
+    with Serial('COM5', 9600, timeout=1) as ser:
+        ser.write("Begin\n".encode())
         ser.flush()
 
         time.sleep(3)
 
         while True:
-            line = ser.readline().strip()
+            line = ser.readline().decode().strip()
             
+            print(line)
             if line == "End":
                 break
             else:
-                times.append(line.split(",")[0])
-                result.append(line.split(",")[1])
+                times.append(float(line.split(",")[0])/1000)
+                result.append(float(line.split(",")[1]))
     
     theoretical = [(3.3*(1-math.exp(-(t/100)/(100000*.0000033)))) for t in range(0,200)]
     
@@ -32,6 +33,8 @@ def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
     plot_axes.plot(times, theoretical, linestyle="-")
     plot_axes.set_xlabel(xlabel)
     plot_axes.set_ylabel(ylabel)
+    plot_axes.set_xticks([0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2])
+    plot_axes.set_yticks([0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5])
     plot_axes.grid(True)
     plot_canvas.draw()
 
@@ -61,4 +64,4 @@ def tk_matplot(plot_function, xlabel, ylabel, title):
 
 
 if __name__ == "__main__":
-    tk_matplot(plot_response, xlabel="Time (ms)", ylabel="Voltage (V)", title="Capacitor Step Response")
+    tk_matplot(plot_response, xlabel="Time (s)", ylabel="Voltage (V)", title="Capacitor Step Response")
