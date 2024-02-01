@@ -15,7 +15,7 @@ timer.callback(None) # Set TC1 to have no callback
 queue = cqueue.IntQueue(200) # Initialize a queue to store ADC readings
 
 def wait_for_input():
-    pass
+    
 
 
 def step_response():
