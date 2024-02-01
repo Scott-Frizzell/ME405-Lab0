@@ -12,7 +12,7 @@ pinC0.low() # Set C0 to low
 adc0 = pyb.ADC(pyb.Pin.board.PB0) # Initialize B0 as ADC input
 timer = pyb.Timer(1, freq=100) # Initialize timer channel 1 to 100Hz (10ms)
 timer.callback(None) # Set TC1 to have no callback
-queue = cqueue.FloatQueue(200) # Initialize a queue to store ADC readings
+queue = cqueue.IntQueue(200) # Initialize a queue to store ADC readings
 
 def step_response():
     """!
@@ -28,7 +28,7 @@ def step_response():
         pass
     
     for i in range(queue.available()):
-        print(f"{(i * 10):2f},{queue.get():2f}") # For each reading in the queue, print comma-separated time and value
+        print(f"{(i * 10)},{queue.get() * 3.3 / 4095}") # For each reading in the queue, print comma-separated time and value
     
     print("End") # Print end to indicate function is finished
 
