@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "ME 405 Lab 0", "index.html", [
+  [ "Lab0", "index.html", [
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ]
     ] ]
@@ -33,7 +33,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_b33a44a19f3807c0bd229d48801e1f90.html"
+"desktop_8py.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
