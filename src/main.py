@@ -15,6 +15,10 @@ timer.callback(None) # Set TC1 to have no callback
 queue = cqueue.IntQueue(200) # Initialize a queue to store ADC readings
 
 def wait_for_input():
+    """!
+    Wait for input from computer then run step_response()
+    @returns None
+    """
     while True:
         ser = pyb.USB_VCP()
         

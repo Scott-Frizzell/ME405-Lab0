@@ -1,3 +1,8 @@
+"""!
+@file desktop.py
+Creates a GUI for user to start and visualize response of capacitor circuit. 
+"""
+
 import math
 import time
 import tkinter
@@ -8,6 +13,14 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 
 
 def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
+    """!
+    Starts the step response and plots experimental and theoretical results.
+    @param plot_axes matplotlib figure which response is plotted on
+    @param plot_canvas canvas which the plot will appear
+    @param xlabel label for x axis of plot
+    @param ylabel label for y axis of plot
+    @returns None
+    """
     times = []
     result = []
 
@@ -40,6 +53,17 @@ def plot_response(plot_axes, plot_canvas, xlabel, ylabel):
 
 
 def tk_matplot(plot_function, xlabel, ylabel, title):
+    """!
+    Create a TK window with one embedded Matplotlib plot.
+    This function makes the window, displays it, and runs the user interface
+    until the user closes the window. The plot function, which must have been
+    supplied by the user, should draw the plot on the supplied plot axes and
+    call the draw() function belonging to the plot canvas to show the plot.
+    @param plot_function The function which, when run, creates a plot
+    @param xlabel The label for the plot's horizontal axis
+    @param ylabel The label for the plot's vertical axis
+    @param title A title for the plot; it shows up in window title bar
+    """
     tk_root = tkinter.Tk()
     tk_root.wm_title(title)
 
